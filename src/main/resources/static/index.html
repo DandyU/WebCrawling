@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Crawler Test</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        body {padding: 5%;}
+        .extra-btn-style {background-color: #e55; border-color:#e55;}
+        .extra-btn-style:hover {background-color: #e50500; border-color:#e50500;}
+        .custom-checkbox {padding-left: 1.7rem;}
+        .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+            background-color: #e55;
+            border-color: #e55;
+            outline-color: #e55;
+        }
+        .extra-packaging-number-input-style {text-align: center;}
+    </style>
+</head>
+<body>
+    <div class="form-group">
+        <label for="targetUrlInput">URL</label>
+        <input type="text" class="form-control" id="targetUrlInput">
+        <small class="form-text text-muted">※ 모든 문자를 입력할 수 있습니다.</small>
+    </div>
+
+    <div class="form-group form-check custom-checkbox">
+        <input type="checkbox" class="form-check-input custom-control-input" id="htmlTagIgnoreChkBox">
+        <label class="form-check-label custom-control-label" for="htmlTagIgnoreChkBox">HTML 태그 제외</label>
+    </div>
+
+    <div class="form-group">
+        <label for="packagingNumberInput">출력 묶음 단위(자연수)</label>
+        <input type="number" class="form-control extra-packaging-number-input-style" id="packagingNumberInput" min="0" value="0">
+    </div>
+
+    <button type="button" class="btn btn-primary btn-lg btn-block extra-btn-style">출력</button>
+
+    <br/>
+
+    <div class="card">
+        <div class="card-header">
+            처리 결과
+        </div>
+        <div class="card-body">
+            <label for="quotientResult">몫</label>
+            <input type="text" class="form-control" id="quotientResult" readonly>
+            <br />
+            <label for="remainderResult">나머지</label>
+            <input type="text" class="form-control" id="remainderResult" readonly>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
