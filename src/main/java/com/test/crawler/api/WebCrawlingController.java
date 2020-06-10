@@ -45,13 +45,8 @@ public class WebCrawlingController {
             return ResponseEntity.badRequest().build();
         }
 
-        try {
-            ResponseInfo resInfo = webCrawlingService.crawlWeb(uri, htmlIgnore, packagingNumber);
+        ResponseInfo resInfo = webCrawlingService.crawlWeb(uri, htmlIgnore, packagingNumber);
 
-            return ResponseEntity.ok().body(resInfo);
-        } catch (UnsupportedEncodingException e) {
-            log.error(e.toString());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        return ResponseEntity.ok().body(resInfo);
     }
 }
