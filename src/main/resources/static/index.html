@@ -75,8 +75,10 @@
 
         // 처리 결과
         const handleResult = (json) => {
-            document.getElementById("quotientResult").value = json.quotient;
-            document.getElementById("remainderResult").value = json.remainder;
+            if (json != undefined) {
+                document.getElementById("quotientResult").value = json.quotient;
+                document.getElementById("remainderResult").value = json.remainder;
+            }
             document.getElementById("starBtn").innerText = '출력';
             startFlag = false;
         }
@@ -91,7 +93,7 @@
                 success: callback,
                 error: function(XMLHttpRequest) {
                     console.error('ajaxPost():통신 에러(' + XMLHttpRequest.status + ')');
-                    document.getElementById("starBtn").innerText = '출력';
+                    callback();
                 }
             });
         }

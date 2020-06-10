@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <property name="LOG_PATH" value="/appLogs"/>
+    <property name="API_LOG_NAME" value="api"/>
+    <property name="ROOT_LOG_NAME" value="root"/>
+    <property name="LOG_MAX_FILE_SIZE" value="200MB"/>
+    <property name="LOG_MAX_HISTORY" value="14"/>
+
+    <!-- 콘솔 로그 출력 -->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d %5p %m \(%logger{0}\)%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root 로그 파일 -->
+    <appender name="rootLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/${ROOT_LOG_NAME}.log</File>
+        <encoder>
+            <pattern>%d %5p %m \(%logger{0}\)%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/${ROOT_LOG_NAME}.log.%d{yyyy-MM-dd}.%i</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- API 로그 파일 -->
+    <appender name="apiLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/${API_LOG_NAME}.log</File>
+        <encoder>
+            <pattern>%d %5p %m \(%logger{0}\)%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/${API_LOG_NAME}.log.%d{yyyy-MM-dd}.%i</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Develop Log -->
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="consoleLog"/>
+        </root>
+
+        <logger name="com.test.crawler.common.log.RequestLogConfig" level="DEBUG" additivity="false">
+            <appender-ref ref="consoleLog"/>
+            <appender-ref ref="apiLogFile"/>
+        </logger>
+
+        <logger name="config" level="DEBUG" additivity="false">
+            <appender-ref ref="consoleLog"/>
+        </logger>
+
+        <logger name="api" level="DEBUG" additivity="false">
+            <appender-ref ref="consoleLog"/>
+            <appender-ref ref="apiLogFile"/>
+        </logger>
+
+        <logger name="dev" level="DEBUG" additivity="false">
+            <appender-ref ref="consoleLog"/>
+        </logger>
+    </springProfile>
+
+    <!-- Staging Log -->
+    <springProfile name="stg">
+        <root level="INFO">
+
+        </root>
+
+        <logger name="com.test.crawler.common.log.RequestLogConfig" level="DEBUG" additivity="false">
+
+            <appender-ref ref="apiLogFile"/>
+        </logger>
+
+        <logger name="config" level="DEBUG" additivity="false">
+
+        </logger>
+
+        <logger name="api" level="DEBUG" additivity="false">
+
+            <appender-ref ref="apiLogFile"/>
+        </logger>
+
+        <logger name="dev" level="DEBUG" additivity="false">
+
+        </logger>
+    </springProfile>
+
+    <!-- Production Log -->
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="rootLogFile"/>
+        </root>
+
+        <logger name="com.test.crawler.common.log.RequestLogConfig" level="INFO">
+            <appender-ref ref="apiLogFile"/>
+        </logger>
+
+        <logger name="config" level="INFO" additivity="false">
+            <appender-ref ref="rootLogFile"/>
+        </logger>
+
+        <logger name="api" level="INFO">
+            <appender-ref ref="apiLogFile"/>
+        </logger>
+    </springProfile>
+
+</configuration>

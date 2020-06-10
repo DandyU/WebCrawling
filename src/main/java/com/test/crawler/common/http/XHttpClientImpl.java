@@ -26,6 +26,7 @@ public class XHttpClientImpl implements XHttpClient {
 
     @Override
     public Flux<DataBuffer> get(URI uri) throws WebClientResponseException {
+        log.info("GET " + uri);
         final Flux<DataBuffer> dataBufferFlux = webClient.get().uri(uri)
                 .accept(MediaType.TEXT_HTML)
                 .retrieve()

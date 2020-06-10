@@ -31,7 +31,8 @@ dependencies {
     // compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.11'
     compile 'org.springframework.boot:spring-boot-starter-webflux'
     compile 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
-
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile group: 'com.google.guava', name: 'guava', version: '28.2-jre'
 }
 
 test {

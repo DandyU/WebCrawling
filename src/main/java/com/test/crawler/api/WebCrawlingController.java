@@ -1,5 +1,6 @@
 package com.test.crawler.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.crawler.api.vo.RequestInfo;
 import com.test.crawler.api.vo.ResponseInfo;
 import org.slf4j.Logger;
