@@ -7,7 +7,6 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
 
 import java.net.URI;
@@ -25,7 +24,7 @@ public class XHttpClientImpl implements XHttpClient {
     }
 
     @Override
-    public Flux<DataBuffer> get(URI uri) throws WebClientResponseException {
+    public Flux<DataBuffer> get(URI uri) {
         log.info("GET " + uri);
         final Flux<DataBuffer> dataBufferFlux = webClient.get().uri(uri)
                 .accept(MediaType.TEXT_HTML)

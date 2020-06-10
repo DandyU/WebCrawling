@@ -24,9 +24,9 @@ public class WebCrawlingServiceImpl implements WebCrawlingService {
     }
 
     @Override
-    public ResponseInfo crawlWeb(URI uri, boolean htmlIgnore, int packagingNumber) throws UnsupportedEncodingException {
+    public ResponseInfo crawlWeb(URI uri, boolean htmlIgnore, int packagingNumber) {
         // URL을 통한 통신
-        Flux<DataBuffer> dataBufferFlux = xHttpClient.get(uri);
+        Flux<DataBuffer> dataBufferFlux = dataBufferFlux = xHttpClient.get(uri);
         Mono<InputStream> inputStream = dataBufferFlux.map(dataBuffer -> dataBuffer.asInputStream(true))
                 .reduce(SequenceInputStream::new);
 
@@ -91,14 +91,12 @@ public class WebCrawlingServiceImpl implements WebCrawlingService {
 
         // 교차 출력
         String crossStr = "";
-        int size = alphabetList.size();
-        size += numberList.size();
+        int size = alphabetList.size() > numberList.size() ? alphabetList.size() : numberList.size();
         for (int i = 0; i < size; i++) {
-            if (alphabetList.size() != 0)
+            if (!alphabetList.isEmpty())
                 crossStr += alphabetList.poll();
-            if (numberList.size() != 0)
+            if (!numberList.isEmpty())
                 crossStr += numberList.poll();
-
         }
 
         // 나누기
