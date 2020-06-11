@@ -89,7 +89,7 @@
                 url: url,
                 data: jsonStr,
                 contentType: 'application/json',
-                timeout: 10000,
+                timeout: 60000,
                 success: callback,
                 error: function(XMLHttpRequest) {
                     console.error('ajaxPost():통신 에러(' + XMLHttpRequest.status + ')');
